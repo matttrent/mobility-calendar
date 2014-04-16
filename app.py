@@ -8,6 +8,41 @@ This file creates your application.
 
 import os
 from flask import Flask, render_template, request, redirect, url_for
+import datetime
+
+videos = [
+ u'7XwKnk16Zbs',
+ u'-ZX1QMTdAC4',
+ u'e4cpBBDVGGU',
+ u'yzHcIzIVRKw',
+ u'1ARPjekZPJw',
+ u'TCoywIXVhgo',
+ u'nntuDmKS6SM',
+ u'3-th5SrJ1rQ',
+ u'RSE95NF4eVc',
+ u'Ol0r8lUqB-Q',
+ u'Rcauv7ePD_0',
+ u'UY31J5BeKrg',
+ u'8bc6Jq6b0Ig',
+ u'qmyEgk0zNPc',
+ u'tJoTVVZadUs',
+ u'WAYqWzQAjHo',
+ u'2iiKibqIQ20',
+ u'hzozw2Aso3M',
+ u'vYTHwlV78y4',
+ u'5nlarY4AdQw',
+ u'UpLUCrq-JdM',
+ u'yt8JteQMAag',
+ u'fkPLnVU1KOo',
+ u'pN-Vvk7QMNk',
+ u'XEXFcPClb9Q',
+ u'H4nWPeyDfNM',
+ u'gCOXvGfWd8M',
+ u'14Y-MU4o0ws',
+ u'SaeAvGh6gkg',
+ u'zSB9whpaSVI',
+ u'TZtQ1hP0zFY'
+]
 
 app = Flask(__name__)
 
@@ -21,7 +56,12 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configur
 @app.route('/')
 def home():
     """Render website's home page."""
-    return render_template('home.html')
+
+    context = {}
+    day = datetime.datetime.today().day
+    context['video'] = videos[day]
+
+    return render_template('home.html', **context)
 
 
 @app.route('/about/')
