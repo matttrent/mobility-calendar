@@ -58,8 +58,16 @@ def home():
     """Render website's home page."""
 
     context = {}
+
     day = datetime.datetime.today().day
-    context['video'] = videos[day]
+    day -= 1
+
+    if 'day' in request.args.keys():
+        day = int( request.args['day'] )
+        day = min( max( day, 0 ), len( videos ) - 1 )
+
+    context['day']      = day
+    context['video']    = videos[day]
 
     return render_template('home.html', **context)
 
